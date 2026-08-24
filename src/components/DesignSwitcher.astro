@@ -3,7 +3,13 @@
  * Floating switcher so the design candidates can be compared quickly.
  */
 interface Props {
-  current: "mission-control" | "deep-space" | "classic" | "polyglot" | "ignition";
+  current:
+    | "mission-control"
+    | "deep-space"
+    | "classic"
+    | "polyglot"
+    | "ignition"
+    | "mono";
 }
 
 const { current } = Astro.props;
@@ -14,6 +20,7 @@ const designs = [
   { id: "classic", label: "Classic", href: "/designs/classic/" },
   { id: "polyglot", label: "Polyglot", href: "/designs/polyglot/" },
   { id: "ignition", label: "Ignition", href: "/designs/ignition/" },
+  { id: "mono", label: "Mono", href: "/designs/mono/" },
 ];
 ---
 
