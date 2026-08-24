@@ -1,0 +1,40 @@
+---
+import Glyph from "@/components/Glyph.astro";
+
+/**
+ * Light/dark toggle. The BaseLayout inline script applies the stored theme
+ * before paint; this button flips the `.dark` class and persists the choice.
+ */
+interface Props {
+  class?: string;
+}
+
+const {
+  class: className = "rounded-lg p-2 text-current transition hover:bg-black/5 dark:hover:bg-white/10",
+} = Astro.props;
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class={className}
+  aria-label="Toggle dark mode"
+  title="Toggle dark mode"
+>
+  <Glyph name="moon" class="size-5 dark:hidden" />
+  <Glyph name="sun" class="hidden size-5 dark:block" />
+</button>
+
+<script>
+  for (const button of document.querySelectorAll("[data-theme-toggle]")) {
+    button.addEventListener("click", () => {
+      const dark = document.documentElement.classList.toggle("dark");
+      document.documentElement.style.colorScheme = dark ? "dark" : "light";
+      try {
+        localStorage.setItem("pyronaut-theme", dark ? "dark" : "light");
+      } catch {
+        /* private mode: theme just won't persist */
+      }
+    });
+  }
+</script>

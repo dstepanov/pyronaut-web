@@ -1,0 +1,296 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Glyph from "@/components/Glyph.astro";
+import { SITE_NAME } from "@/lib/site-content";
+
+const designs = [
+  {
+    id: "mission-control",
+    name: "Mission Control",
+    href: "/designs/mission-control/",
+    tagline: "Clean, confident, enterprise-ready",
+    copy: "A modern SaaS look. Warm flame gradients on a crisp canvas, soft shadows, and a dark terminal hero card. Closest in spirit to micronaut.io — but sharper.",
+    chips: ["Gradient accents", "Terminal hero", "Light + dark"],
+    previewClass: "bg-white",
+    preview: "light" as const,
+  },
+  {
+    id: "deep-space",
+    name: "Deep Space",
+    href: "/designs/deep-space/",
+    tagline: "Atmospheric, developer-first",
+    copy: "A starfield sky with a glowing flame nebula and glass cards; the mascot floats in a porthole. Night mode is the hero, day mode is a calm launch morning.",
+    chips: ["Starfield hero", "Glow & glass", "Light + dark"],
+    previewClass: "bg-ink-900",
+    preview: "dark" as const,
+  },
+  {
+    id: "classic",
+    name: "Classic",
+    href: "/designs/classic/",
+    tagline: "Micronaut heritage, Pyronaut palette",
+    copy: "Deliberately close to micronaut.io: bordered sections, compact cards, outline badges, a numbered-steps hero card, and ghost arrow links — familiar to any Micronaut user.",
+    chips: ["Micronaut-style", "Numbered steps", "Light + dark"],
+    previewClass: "bg-white",
+    preview: "classic" as const,
+  },
+  {
+    id: "polyglot",
+    name: "Polyglot",
+    href: "/designs/polyglot/",
+    tagline: "Micronaut structure × GraalVM energy",
+    copy: "A deep-navy gradient-mesh hero with performance stats and a runtime layer diagram, over structured Micronaut-style body sections. Blue → violet → flame spectrum accent.",
+    chips: ["Spectrum gradient", "Perf stats", "Light + dark"],
+    previewClass: "bg-ink-950",
+    preview: "polyglot" as const,
+  },
+  {
+    id: "ignition",
+    name: "Ignition",
+    href: "/designs/ignition/",
+    tagline: "Editorial startup energy",
+    copy: "Announcement bar, mono uppercase kickers with orange dots, a huge tight editorial headline, dark pill buttons, mascot artwork card with an overlapping code window, and a foundation logo strip.",
+    chips: ["Mono kickers", "Artwork card", "Light + dark"],
+    previewClass: "bg-ink-50",
+    preview: "ignition" as const,
+  },
+];
+---
+
+<BaseLayout
+  title={`${SITE_NAME} — choose a design direction`}
+  description="Five design candidates for the Pyronaut website. Pick a direction."
+  bodyClass="bg-ink-950 font-sans text-ink-100 antialiased"
+>
+  <main class="relative min-h-screen overflow-hidden">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-60"
+      style="background-image: radial-gradient(1px 1px at 15% 25%, #ffffff88 50%, transparent 51%), radial-gradient(1.5px 1.5px at 45% 15%, #ffffff77 50%, transparent 51%), radial-gradient(1px 1px at 75% 35%, #ffffff66 50%, transparent 51%), radial-gradient(1px 1px at 30% 70%, #ffffff55 50%, transparent 51%), radial-gradient(1.5px 1.5px at 85% 75%, #ffffff77 50%, transparent 51%);"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute -bottom-64 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-[50%] bg-gradient-to-t from-flame-500/30 via-ember-500/10 to-transparent blur-3xl"
+    >
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <div class="text-center">
+        <img
+          src="/pyronaut-assets/logo-full.png"
+          alt="Pyronaut"
+          class="mx-auto w-56 [filter:drop-shadow(0_0_1px_#fff)_drop-shadow(0_0_1px_rgba(255,255,255,0.8))_drop-shadow(0_0_22px_rgba(249,115,22,0.35))] md:w-64"
+        />
+        <p
+          class="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-flame-500/40 bg-flame-500/10 px-4 py-1.5 text-xs font-semibold text-flame-300"
+        >
+          <Glyph name="flame" class="size-3.5" />
+          Five design candidates — pick a direction
+        </p>
+        <h1
+          class="mx-auto mt-5 max-w-2xl font-display text-4xl font-bold tracking-tight text-white md:text-5xl"
+        >
+          One site. Five ways to set it on fire.
+        </h1>
+        <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-ink-300">
+          Every candidate shares the same structure and content — hero, feature
+          grid, live code showcase, workflow, comparisons, and footer — and
+          every one supports light and dark mode (use the moon/sun toggle in
+          each header). Only the design language changes. The floating switcher
+          on any page jumps between them.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        {
+          designs.map((design, index) => (
+            <a
+              href={design.href}
+              class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1.5 hover:border-flame-500/50 hover:shadow-2xl hover:shadow-flame-500/20"
+            >
+              {/* Mini preview */}
+              <div
+                class:list={[
+                  "relative h-44 overflow-hidden border-b border-white/10 p-4",
+                  design.previewClass,
+                ]}
+              >
+                {design.preview === "light" && (
+                  <div class="grid gap-2">
+                    <div class="flex items-center gap-2">
+                      <img
+                        src="/pyronaut-assets/logo-header.png"
+                        alt=""
+                        class="h-4 w-auto"
+                      />
+                      <span class="ml-auto h-4 w-16 rounded-md bg-gradient-to-r from-flame-500 to-ember-500" />
+                    </div>
+                    <div class="mt-2 h-3 w-4/5 rounded bg-ink-900/85" />
+                    <div class="h-3 w-3/5 rounded bg-gradient-to-r from-flame-400 to-ember-500" />
+                    <div class="h-2 w-2/3 rounded bg-ink-200" />
+                    <div class="mt-2 grid grid-cols-4 gap-1.5">
+                      {[0, 1, 2, 3].map(() => (
+                        <div class="h-9 rounded-md border border-ink-100 bg-white shadow-sm" />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {design.preview === "dark" && (
+                  <div class="grid gap-2">
+                    <div class="flex items-center gap-2">
+                      <img
+                        src="/pyronaut-assets/logo-header-dark.png"
+                        alt=""
+                        class="h-4 w-auto"
+                      />
+                      <span class="ml-auto h-4 w-16 rounded-md bg-gradient-to-r from-flame-500 to-ember-500" />
+                    </div>
+                    <div class="mt-2 h-3 w-4/5 rounded bg-white/90" />
+                    <div class="h-3 w-3/5 rounded bg-gradient-to-r from-flame-400 to-ember-500" />
+                    <div class="h-2 w-2/3 rounded bg-white/20" />
+                    <div class="mt-2 grid grid-cols-4 gap-1.5">
+                      {[0, 1, 2, 3].map(() => (
+                        <div class="h-9 rounded-md border border-flame-500/30 bg-white/5" />
+                      ))}
+                    </div>
+                    <div class="pointer-events-none absolute -bottom-10 left-1/2 h-24 w-56 -translate-x-1/2 rounded-[50%] bg-flame-500/40 blur-2xl" />
+                  </div>
+                )}
+                {design.preview === "classic" && (
+                  <div class="grid gap-2">
+                    <div class="flex items-center gap-2 border-b border-ink-100 pb-2">
+                      <img
+                        src="/pyronaut-assets/logo-header.png"
+                        alt=""
+                        class="h-4 w-auto"
+                      />
+                      <span class="ml-auto h-4 w-16 rounded bg-flame-600" />
+                    </div>
+                    <div class="grid grid-cols-[1.4fr_1fr] gap-2">
+                      <div class="grid gap-1.5">
+                        <div class="h-3 w-11/12 rounded-sm bg-ink-900/85" />
+                        <div class="h-3 w-3/5 rounded-sm bg-flame-600" />
+                        <div class="h-2 w-4/5 rounded-sm bg-ink-200" />
+                        <div class="mt-1 flex gap-1.5">
+                          <span class="h-3.5 w-12 rounded-sm border border-ink-200 bg-white" />
+                          <span class="h-3.5 w-12 rounded-sm border border-ink-200 bg-white" />
+                        </div>
+                      </div>
+                      <div class="grid gap-1 rounded-md border border-flame-200 bg-white p-2 shadow-sm">
+                        {[0, 1, 2].map((step) => (
+                          <div class="flex items-center gap-1.5">
+                            <span class="grid size-3.5 place-items-center rounded-full bg-flame-600 text-[0.4rem] font-bold text-white">
+                              {step + 1}
+                            </span>
+                            <span class="h-1.5 w-full rounded-sm bg-ink-100" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div class="mt-1 grid grid-cols-4 gap-1.5">
+                      {[0, 1, 2, 3].map(() => (
+                        <div class="h-8 rounded-md border border-ink-200 bg-ink-50" />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {design.preview === "ignition" && (
+                  <div class="grid gap-2">
+                    <div class="flex items-center justify-center gap-2 rounded-sm bg-ink-950 py-1">
+                      <span class="rounded-sm bg-ember-500 px-1 font-mono text-[0.45rem] font-bold uppercase text-white">
+                        New
+                      </span>
+                      <span class="h-1.5 w-24 rounded-sm bg-white/30" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <img
+                        src="/pyronaut-assets/logo-header.png"
+                        alt=""
+                        class="h-4 w-auto"
+                      />
+                      <span class="ml-auto h-4 w-16 rounded-md bg-ink-950" />
+                    </div>
+                    <div class="grid grid-cols-[1.3fr_1fr] gap-2">
+                      <div class="grid gap-1.5">
+                        <div class="flex items-center gap-1">
+                          <span class="size-1.5 rounded-full bg-ember-500" />
+                          <span class="h-1.5 w-16 rounded-sm bg-ink-300" />
+                        </div>
+                        <div class="h-3 w-11/12 rounded-sm bg-ink-950" />
+                        <div class="h-3 w-4/5 rounded-sm bg-flame-500" />
+                        <div class="h-3 w-3/5 rounded-sm bg-ink-950" />
+                        <div class="mt-1 flex gap-1.5">
+                          <span class="h-4 w-14 rounded-md bg-ink-950" />
+                          <span class="h-4 w-14 rounded-md border border-ink-200 bg-white" />
+                        </div>
+                      </div>
+                      <div class="relative">
+                        <div class="h-14 rounded-lg border border-ink-200 bg-white shadow-sm" />
+                        <div class="absolute -bottom-3 right-0 h-10 w-5/6 rounded-md bg-ink-950 shadow" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {design.preview === "polyglot" && (
+                  <div class="grid gap-2">
+                    <span class="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-python-blue via-violet-500 to-flame-500" />
+                    <div class="flex items-center gap-2">
+                      <img
+                        src="/pyronaut-assets/logo-header-dark.png"
+                        alt=""
+                        class="h-4 w-auto"
+                      />
+                      <span class="ml-auto h-4 w-16 rounded-md bg-gradient-to-r from-flame-500 to-ember-500" />
+                    </div>
+                    <div class="mt-2 h-3 w-4/5 rounded bg-white/90" />
+                    <div class="h-3 w-3/5 rounded bg-gradient-to-r from-python-blue via-violet-400 to-flame-400" />
+                    <div class="mt-1 grid grid-cols-4 gap-px overflow-hidden rounded-md border border-white/10 bg-white/10">
+                      {[0, 1, 2, 3].map(() => (
+                        <div class="grid gap-1 bg-ink-950/90 p-1.5">
+                          <span class="h-2 w-3/4 rounded-sm bg-white/80" />
+                          <span class="h-1.5 w-1/2 rounded-sm bg-white/25" />
+                        </div>
+                      ))}
+                    </div>
+                    <div class="pointer-events-none absolute -left-8 top-6 size-24 rounded-full bg-python-blue/30 blur-2xl" />
+                    <div class="pointer-events-none absolute -right-8 bottom-0 size-24 rounded-full bg-flame-600/30 blur-2xl" />
+                  </div>
+                )}
+              </div>
+
+              <div class="flex grow flex-col p-6">
+                <div class="flex items-center justify-between">
+                  <h2 class="font-display text-xl font-bold text-white">
+                    {design.name}
+                  </h2>
+                  <span class="font-mono text-xs text-ink-400">
+                    0{index + 1}
+                  </span>
+                </div>
+                <p class="mt-1 text-sm font-semibold text-flame-400">
+                  {design.tagline}
+                </p>
+                <p class="mt-3 text-sm leading-6 text-ink-300">{design.copy}</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {design.chips.map((chip) => (
+                    <span class="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[0.7rem] font-medium text-ink-200">
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+                <span class="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-flame-400 transition group-hover:gap-3">
+                  View this design
+                  <Glyph name="arrow-right" class="size-4" />
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <p class="mt-12 text-center text-xs text-ink-500">
+        Built with Astro, Tailwind CSS, and TypeScript · Content from the
+        Pyronaut Master Positioning Brief
+      </p>
+    </div>
+  </main>
+</BaseLayout>

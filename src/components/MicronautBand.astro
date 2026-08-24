@@ -1,0 +1,41 @@
+---
+import Glyph from "@/components/Glyph.astro";
+import { MICRONAUT_AUDIENCE } from "@/lib/site-content";
+
+/**
+ * §44 of the positioning brief: the adjacent Micronaut-team audience gets
+ * its own quiet band — same product, different reason to choose it.
+ */
+interface Props {
+  tone?: "adaptive" | "dark";
+}
+
+const { tone = "adaptive" } = Astro.props;
+
+const section =
+  tone === "dark"
+    ? "border-t border-white/10 bg-ink-900/60"
+    : "border-t border-ink-200/70 bg-ink-50 dark:border-white/10 dark:bg-ink-900/60";
+const strong =
+  tone === "dark" ? "font-semibold text-white" : "font-semibold text-ink-900 dark:text-white";
+const copy = tone === "dark" ? "text-ink-300" : "text-ink-500 dark:text-ink-300";
+const link =
+  tone === "dark"
+    ? "inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-flame-400 transition hover:gap-2.5"
+    : "inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-flame-600 transition hover:gap-2.5 dark:text-flame-400";
+---
+
+<section class={section}>
+  <div
+    class="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-7 md:flex-row md:items-center md:justify-between"
+  >
+    <p class:list={["text-sm leading-6", copy]}>
+      <span class={strong}>{MICRONAUT_AUDIENCE.kicker}</span>{" "}
+      {MICRONAUT_AUDIENCE.copy}
+    </p>
+    <a href={MICRONAUT_AUDIENCE.href} class={link}>
+      {MICRONAUT_AUDIENCE.linkLabel}
+      <Glyph name="arrow-right" class="size-4" />
+    </a>
+  </div>
+</section>

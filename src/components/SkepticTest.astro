@@ -1,0 +1,56 @@
+---
+import Glyph from "@/components/Glyph.astro";
+import { SKEPTIC } from "@/lib/site-content";
+
+/**
+ * §33 of the positioning brief: every claim must survive the skeptical
+ * principal engineer. This block asks their exact question and answers it
+ * with the concrete "what you stop maintaining" list.
+ */
+interface Props {
+  tone?: "adaptive" | "dark";
+}
+
+const { tone = "adaptive" } = Astro.props;
+
+const box =
+  tone === "dark"
+    ? "mx-auto mt-12 max-w-4xl rounded-2xl border border-white/15 bg-white/[0.04] p-8"
+    : "mx-auto mt-12 max-w-4xl rounded-2xl border border-ink-200 bg-white p-8 dark:border-white/10 dark:bg-white/[0.03]";
+const kicker =
+  tone === "dark"
+    ? "text-xs font-bold uppercase tracking-wider text-flame-400"
+    : "text-xs font-bold uppercase tracking-wider text-flame-700 dark:text-flame-400";
+const question =
+  tone === "dark"
+    ? "mt-3 text-xl font-bold leading-8 text-white"
+    : "mt-3 text-xl font-bold leading-8 text-ink-900 dark:text-white";
+const intro =
+  tone === "dark"
+    ? "mt-3 text-sm leading-6 text-ink-300"
+    : "mt-3 text-sm leading-6 text-ink-500 dark:text-ink-300";
+const answer =
+  tone === "dark"
+    ? "flex items-start gap-2.5 text-sm leading-6 text-ink-200"
+    : "flex items-start gap-2.5 text-sm leading-6 text-ink-600 dark:text-ink-200";
+const check =
+  tone === "dark"
+    ? "mt-1 size-4 shrink-0 text-flame-400"
+    : "mt-1 size-4 shrink-0 text-flame-700 dark:text-flame-400";
+---
+
+<div class={box}>
+  <p class={kicker}>The skeptical principal engineer test</p>
+  <p class={question}>&ldquo;{SKEPTIC.question}&rdquo;</p>
+  <p class={intro}>{SKEPTIC.intro}</p>
+  <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+    {
+      SKEPTIC.answers.map((item) => (
+        <li class={answer}>
+          <Glyph name="check" class={check} />
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+</div>

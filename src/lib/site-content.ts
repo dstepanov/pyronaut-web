@@ -1,0 +1,438 @@
+/**
+ * Shared marketing content for all three Pyronaut design variants.
+ * Sourced from the Pyronaut Master Positioning Brief v0.8.
+ */
+
+export const SITE_NAME = "Pyronaut";
+
+export const SITE_DESCRIPTION =
+  "Pyronaut is an integrated application platform for Python, built on the Micronaut application model. Build the Python application without having to build the application platform around it.";
+
+export const HERO = {
+  eyebrow: "Integrated application platform for Python",
+  title: "Build the Python application. Not the platform around it.",
+  copy: "Pyronaut combines Python on GraalPy with the Micronaut application model — one platform with a consistent way to configure, build, test, validate, package, and run Python applications.",
+  badges: ["Python on GraalPy", "Micronaut application model", "GraalVM native ready"],
+  ctas: [
+    { label: "Get started", href: "/docs/", primary: true },
+    { label: "Browse guides", href: "/guides/", primary: false },
+    { label: "View on GitHub", href: "https://github.com/micronaut-projects", primary: false },
+  ],
+};
+
+export interface Feature {
+  title: string;
+  copy: string;
+  icon: string;
+  href: string;
+}
+
+/** Icon names map to inline SVG glyphs rendered by each design. */
+export const FEATURES: Feature[] = [
+  {
+    title: "Micronaut model, Python code",
+    copy: "Use @Controller, @Get, @Singleton, and dependency injection directly from Python source.",
+    icon: "annotations",
+    href: "/docs/programming-model/",
+  },
+  {
+    title: "One application workflow",
+    copy: "create → dev → test → validate-config → build. One CLI coordinates the whole lifecycle.",
+    icon: "workflow",
+    href: "/docs/cli/",
+  },
+  {
+    title: "Prepare before startup",
+    copy: "DI metadata, serialization, and OpenAPI are processed at build time — not discovered at runtime.",
+    icon: "bolt",
+    href: "/docs/source-processing/",
+  },
+  {
+    title: "Define once, use everywhere",
+    copy: "A Python dataclass drives routing, validation, serialization, OpenAPI, and editor completion.",
+    icon: "layers",
+    href: "/docs/serialization/",
+  },
+  {
+    title: "Testing with the application",
+    copy: "pytest integrated with Micronaut Test, an embedded server, and real test infrastructure.",
+    icon: "flask",
+    href: "/docs/testing/",
+  },
+  {
+    title: "Test Resources built in",
+    copy: "PostgreSQL, Kafka, or Redis appear for dev and test runs — no compose files or fixtures.",
+    icon: "database",
+    href: "/docs/test-resources/",
+  },
+  {
+    title: "Production validation",
+    copy: "Validate configuration and the dependency injection graph before the service ships.",
+    icon: "shield",
+    href: "/docs/validation/",
+  },
+  {
+    title: "Native packaging paths",
+    copy: "JVM wheel, container image, GraalVM native executable, or a reusable Crema runtime.",
+    icon: "rocket",
+    href: "/docs/packaging/",
+  },
+];
+
+export interface WorkflowStage {
+  command: string;
+  title: string;
+  copy: string;
+}
+
+export const WORKFLOW: WorkflowStage[] = [
+  {
+    command: "pyronaut create",
+    title: "Create",
+    copy: "Generate a project with platform dependencies resolved.",
+  },
+  {
+    command: "pyronaut dev",
+    title: "Develop",
+    copy: "Local server with automatic reload and managed Test Resources.",
+  },
+  {
+    command: "pyronaut test",
+    title: "Test",
+    copy: "pytest against the real application context and infrastructure.",
+  },
+  {
+    command: "pyronaut validate-config",
+    title: "Validate",
+    copy: "Check configuration and DI wiring for dev, run, test, and production.",
+  },
+  {
+    command: "pyronaut build",
+    title: "Ship",
+    copy: "Produce a wheel, container image, or native executable.",
+  },
+];
+
+export interface CodeExample {
+  id: string;
+  label: string;
+  filename: string;
+  language: "python" | "shell" | "yaml";
+  code: string;
+  caption: string;
+}
+
+export const CODE_EXAMPLES: CodeExample[] = [
+  {
+    id: "controller",
+    label: "Controller",
+    filename: "rockets.py",
+    language: "python",
+    caption:
+      "Micronaut annotations on plain Python — routing, DI, validation, and serialization from one definition.",
+    code: `from dataclasses import dataclass
+
+from pyronaut.http import Controller, Get, Post, Body
+from pyronaut.inject import Singleton
+from pyronaut.serde import Serdeable
+from pyronaut.validation import Validated, NotBlank, Positive
+
+
+@Serdeable
+@dataclass
+class Rocket:
+    name: str  # @NotBlank
+    thrust_kn: float  # @Positive
+
+
+@Singleton
+class RocketService:
+    def __init__(self) -> None:
+        self._fleet: list[Rocket] = []
+
+    def launch(self, rocket: Rocket) -> Rocket:
+        self._fleet.append(rocket)
+        return rocket
+
+    def fleet(self) -> list[Rocket]:
+        return list(self._fleet)
+
+
+@Validated
+@Controller("/rockets")
+class RocketController:
+    def __init__(self, service: RocketService) -> None:
+        self.service = service
+
+    @Get("/")
+    def list(self) -> list[Rocket]:
+        return self.service.fleet()
+
+    @Post("/")
+    def launch(self, rocket: Body[Rocket]) -> Rocket:
+        return self.service.launch(rocket)`,
+  },
+  {
+    id: "test",
+    label: "Test",
+    filename: "test_rockets.py",
+    language: "python",
+    caption:
+      "pytest runs against the same embedded server, DI context, and Test Resources the application uses.",
+    code: `import pytest
+
+from pyronaut.test import PyronautTest
+from pyronaut.requests import HttpClient
+
+
+@PyronautTest
+class TestRockets:
+    def test_launch(self, client: HttpClient) -> None:
+        rocket = {"name": "Ariane 7", "thrust_kn": 15000}
+
+        created = client.post("/rockets", json=rocket)
+        assert created.status == 200
+
+        fleet = client.get("/rockets").json()
+        assert fleet[0]["name"] == "Ariane 7"
+
+    def test_validation(self, client: HttpClient) -> None:
+        response = client.post(
+            "/rockets", json={"name": "", "thrust_kn": -1}
+        )
+        assert response.status == 400`,
+  },
+  {
+    id: "workflow",
+    label: "Workflow",
+    filename: "terminal",
+    language: "shell",
+    caption:
+      "One CLI coordinates creation, development, testing, validation, and production packaging.",
+    code: `$ pyronaut create rocket-service
+  Resolved Micronaut platform 5.x via Maven
+  Created rocket-service/ with pyproject.toml
+
+$ pyronaut dev
+  Test Resources: postgres:17 ready on :5432
+  Server running on http://localhost:8080 (reload on)
+
+$ pyronaut test
+  12 passed in 3.4s (JUnit XML + HTML report)
+
+$ pyronaut validate-config --env production
+  Configuration OK · DI graph OK
+
+$ pyronaut build --native
+  Native executable: build/rocket-service`,
+  },
+];
+
+export const CODE_PROOFS = [
+  "Dependency injection resolved from build-time metadata",
+  "Wiring and configuration errors surface at build time, not in production",
+  "Tests run with the same services the application depends on",
+];
+
+/**
+ * §12 of the brief: "Define it once and use it in many places" is called out
+ * as stronger than simply packaging tools together — so it gets a visual.
+ */
+export const DEFINE_ONCE = {
+  source: "One Python dataclass",
+  targets: [
+    "HTTP routing",
+    "Validation",
+    "Serialization",
+    "OpenAPI & Swagger",
+    "Dependency injection",
+    "Editor completion",
+    "Tests",
+  ],
+};
+
+/** §27: best-fit qualification signals, verbatim from the brief. */
+export const BEST_FIT_SIGNALS = [
+  "Every Python service is configured differently.",
+  "Our internal Python template has become a platform product.",
+  "The API is easy. Everything required to ship it reliably is expensive.",
+  "Local development and CI behave differently.",
+  "Our test infrastructure is difficult to maintain.",
+  "We keep rebuilding Docker, CI, configuration, and deployment conventions.",
+];
+
+/** §33: the skeptical principal engineer test, answered concretely. */
+export const SKEPTIC = {
+  question:
+    "Why can't I just use FastAPI + Uvicorn + Pydantic + uv + pytest + Testcontainers + Docker?",
+  intro:
+    "You can — every one of those tools is excellent. The honest answer is about what you stop maintaining:",
+  answers: [
+    "You no longer maintain the integrations between framework, server, validation, testing, and packaging.",
+    "Configuration is checked automatically before packaging — for each environment.",
+    "The same metadata drives HTTP, validation, serialization, and OpenAPI.",
+    "Test infrastructure is managed as part of development and testing.",
+    "The same project produces wheel, container, native, and Crema artifacts.",
+    "Wiring problems are found before the service reaches production.",
+  ],
+};
+
+/** §44: the adjacent audience — Micronaut teams adopting Python. */
+export const MICRONAUT_AUDIENCE = {
+  kicker: "Already building on Micronaut?",
+  copy: "Add Python without adding a second application platform — use Python on the Micronaut platform you already know.",
+  linkLabel: "Pyronaut for Micronaut teams",
+  href: "/docs/micronaut-teams/",
+};
+
+export interface DeepDive {
+  title: string;
+  copy: string;
+  bullets: string[];
+  linkLabel: string;
+  href: string;
+  icon: string;
+}
+
+export const DEEP_DIVES: DeepDive[] = [
+  {
+    title: "Prepare more before the application starts",
+    copy: "Pyronaut processes source and metadata at build time, where Python frameworks usually discover behavior at runtime.",
+    bullets: [
+      "Earlier error detection",
+      "Stronger IDE support and stubs",
+      "Less runtime reflection",
+      "Predictable native packaging",
+    ],
+    linkLabel: "How source processing works",
+    href: "/docs/source-processing/",
+    icon: "bolt",
+  },
+  {
+    title: "Validate before production, not in it",
+    copy: "Check configuration for dev, test, and production environments — and validate the whole dependency injection graph — before deploying.",
+    bullets: [
+      "validate-config per environment",
+      "DI graph validation",
+      "Config schemas from processing",
+      "Fail in CI, not at 3 a.m.",
+    ],
+    linkLabel: "Production validation",
+    href: "/docs/validation/",
+    icon: "shield",
+  },
+  {
+    title: "Delivery is part of the platform",
+    copy: "From Python source through tested and validated production artifact — pick the packaging that fits the workload.",
+    bullets: [
+      "JVM wheel or container image",
+      "GraalVM native executable",
+      "Native container image",
+      "Reusable Crema runtime",
+    ],
+    linkLabel: "Packaging options",
+    href: "/docs/packaging/",
+    icon: "rocket",
+  },
+];
+
+export interface Persona {
+  role: string;
+  value: string;
+}
+
+export const PERSONAS: Persona[] = [
+  {
+    role: "Python developer",
+    value:
+      "Spend less time on repeated integration work — build with one consistent application model.",
+  },
+  {
+    role: "Architect",
+    value:
+      "Fewer technology combinations and fewer different ways of building the same kind of service.",
+  },
+  {
+    role: "Platform engineering",
+    value:
+      "One consistent way to build, validate, package, and run Python applications across teams.",
+  },
+  {
+    role: "Engineering leadership",
+    value:
+      "Less duplicated platform engineering and a smaller support surface across the organization.",
+  },
+];
+
+export const STACK_COMPARISON = {
+  conventional: {
+    title: "Assemble it yourself",
+    items: [
+      "FastAPI + Uvicorn",
+      "Pydantic + Pydantic Settings",
+      "pytest + Testcontainers + fixtures",
+      "structlog + OpenAPI setup",
+      "Dockerfiles + CI templates",
+      "…and every integration between them",
+    ],
+  },
+  pyronaut: {
+    title: "Adopt one platform",
+    items: [
+      "Micronaut HTTP on Netty",
+      "Validation + serialization built in",
+      "pytest + Micronaut Test + Test Resources",
+      "Unified config and logging",
+      "Wheel, container, and native builds",
+      "…designed to work together",
+    ],
+  },
+};
+
+export const HONEST_NOTES = [
+  {
+    title: "Python on GraalPy",
+    copy: "Pyronaut runs Python on GraalPy, not CPython. Confirm the packages you depend on work with GraalPy before adopting.",
+  },
+  {
+    title: "Micronaut is not hidden",
+    copy: "You will meet Micronaut, Jakarta, and Maven concepts. That is the programming model, not an implementation detail.",
+  },
+  {
+    title: "Two dependency ecosystems",
+    copy: "Python packages keep pip, uv, and pyproject.toml. Platform dependencies come from Maven. You work with both.",
+  },
+  {
+    title: "The trade-off",
+    copy: "You give up some freedom to choose every component independently in exchange for one platform and a more consistent way of building.",
+  },
+];
+
+export const FOOTER_COLUMNS = [
+  {
+    title: "Platform",
+    links: [
+      { label: "Documentation", href: "/docs/" },
+      { label: "Guides", href: "/guides/" },
+      { label: "CLI reference", href: "/docs/cli/" },
+      { label: "GraalPy compatibility", href: "/docs/compatibility/" },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      { label: "GitHub", href: "https://github.com/micronaut-projects" },
+      { label: "Discussions", href: "https://github.com/micronaut-projects/micronaut-core/discussions" },
+      { label: "Blog", href: "/blog/" },
+      { label: "Success stories", href: "/stories/" },
+    ],
+  },
+  {
+    title: "Ecosystem",
+    links: [
+      { label: "Micronaut Framework", href: "https://micronaut.io" },
+      { label: "GraalVM", href: "https://www.graalvm.org" },
+      { label: "GraalPy", href: "https://www.graalvm.org/python/" },
+    ],
+  },
+];

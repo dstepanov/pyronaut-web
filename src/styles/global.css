@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: the theme toggle sets `.dark` on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Pyronaut brand palette, drawn from the logo artwork. */
+  --color-flame-50: #fff7ed;
+  --color-flame-100: #ffedd5;
+  --color-flame-200: #fed7aa;
+  --color-flame-300: #fdba74;
+  --color-flame-400: #fb923c;
+  --color-flame-500: #f97316;
+  --color-flame-600: #ea580c;
+  --color-flame-700: #c2410c;
+
+  --color-ember-500: #ef4444;
+  --color-ember-600: #dc2626;
+
+  --color-ink-50: #f6f7f9;
+  --color-ink-100: #e9ebf0;
+  --color-ink-200: #d3d8e2;
+  --color-ink-300: #a9b2c5;
+  --color-ink-400: #6f7c99;
+  --color-ink-500: #47536e;
+  --color-ink-600: #303b52;
+  --color-ink-700: #222b3f;
+  --color-ink-800: #171e30;
+  --color-ink-900: #101524;
+  --color-ink-950: #0b0f1b;
+
+  --color-python-blue: #3776ab;
+  --color-python-yellow: #ffd43b;
+
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --font-poster: "Bricolage Grotesque", "Space Grotesk", ui-sans-serif, sans-serif;
+
+  --animate-flame-pulse: flame-pulse 5s ease-in-out infinite;
+  --animate-drift: drift 14s ease-in-out infinite;
+
+  @keyframes flame-pulse {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.06);
+    }
+  }
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Shiki blocks: let the design control the frame, keep the code scrollable. */
+.code-tabs pre {
+  margin: 0;
+  padding: 1.1rem 1.25rem;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  background-color: transparent !important;
+}
+.code-tabs pre code {
+  font-family: var(--font-mono);
+}
+
+/* Shiki dual themes: switch token colors when `.dark` is active. */
+.dark .code-tabs .astro-code span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+}
+
+/* Scroll-reveal: activated by JS (BaseLayout) so content is never hidden
+   without it; skipped entirely under prefers-reduced-motion. */
+html.reveal-ready main section {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.reveal-ready main section.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Fiery gradient text used across designs. */
+.text-flame-gradient {
+  background: linear-gradient(92deg, #fbbf24 0%, #f97316 38%, #ef4444 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
