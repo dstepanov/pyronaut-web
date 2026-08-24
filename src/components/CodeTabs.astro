@@ -22,6 +22,9 @@ interface FrameStyle {
   tabs: string;
   tab: string;
   tabActive: string;
+  /** Code area surface — tinted in light mode so code reads as an inset
+   *  object even when the frame sits on a same-colored section. */
+  panel: string;
   caption: string;
 }
 
@@ -36,6 +39,7 @@ const frames: Record<string, FrameStyle> = {
     tab: "rounded-t-lg px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-600 dark:text-ink-300 dark:hover:text-white",
     tabActive:
       "!text-flame-700 border-b-2 border-flame-500 bg-flame-50/60 dark:!text-flame-400 dark:bg-flame-500/10",
+    panel: "bg-ink-50/50 dark:bg-transparent",
     caption:
       "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-400 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
   },
@@ -49,6 +53,7 @@ const frames: Record<string, FrameStyle> = {
     tab: "rounded-t-lg px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-700 dark:text-ink-300 dark:hover:text-white",
     tabActive:
       "!text-flame-700 border-b-2 border-flame-500 bg-flame-50/70 dark:!text-flame-400 dark:bg-flame-500/10",
+    panel: "bg-ink-50/70 dark:bg-transparent",
     caption:
       "border-t border-ink-100 bg-ink-50/80 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
   },
@@ -62,6 +67,7 @@ const frames: Record<string, FrameStyle> = {
     tab: "rounded-t-md px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-700 dark:hover:text-ink-100",
     tabActive:
       "!text-flame-700 border-b-2 border-flame-600 bg-flame-50/60 dark:!text-flame-400 dark:bg-flame-500/10",
+    panel: "bg-ink-50/60 dark:bg-transparent",
     caption:
       "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-ink-700 dark:bg-ink-800/60 dark:text-ink-300",
   },
@@ -75,6 +81,7 @@ const frames: Record<string, FrameStyle> = {
     tab: "rounded-t-lg px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-ink-400 transition hover:text-ink-800 dark:hover:text-white",
     tabActive:
       "!text-ink-950 border-b-2 border-flame-500 dark:!text-white",
+    panel: "bg-ink-50/60 dark:bg-transparent",
     caption:
       "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
   },
@@ -88,6 +95,7 @@ const frames: Record<string, FrameStyle> = {
     tab: "rounded-t-lg px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-700 dark:text-ink-300 dark:hover:text-white",
     tabActive:
       "!text-python-blue border-b-2 border-python-blue bg-python-blue/5 dark:!text-flame-400 dark:border-flame-500 dark:bg-flame-500/10",
+    panel: "bg-ink-50/60 dark:bg-transparent",
     caption:
       "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
   },
@@ -138,7 +146,7 @@ const s = frames[variant]!;
         role="tabpanel"
         id={`${id}-panel-${example.id}`}
         aria-labelledby={`${id}-tab-${example.id}`}
-        class:list={[index > 0 && "hidden"]}
+        class:list={[s.panel, index > 0 && "hidden"]}
         data-tab-panel={example.id}
       >
         <Code
