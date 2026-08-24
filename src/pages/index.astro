@@ -5,14 +5,24 @@ import { SITE_NAME } from "@/lib/site-content";
 
 const designs = [
   {
-    id: "mission-control",
-    name: "Mission Control",
-    href: "/designs/mission-control/",
-    tagline: "Clean, confident, enterprise-ready",
-    copy: "A modern SaaS look. Warm flame gradients on a crisp canvas, soft shadows, and a dark terminal hero card. Closest in spirit to micronaut.io — but sharper.",
-    chips: ["Gradient accents", "Terminal hero", "Light + dark"],
+    id: "ignition",
+    name: "Ignition",
+    href: "/designs/ignition/",
+    tagline: "Editorial startup energy",
+    copy: "Announcement bar, mono uppercase kickers with orange dots, a huge tight editorial headline, dark pill buttons, mascot artwork card with an overlapping code window, and a foundation logo strip.",
+    chips: ["Mono kickers", "Artwork card", "Light + dark"],
+    previewClass: "bg-ink-50",
+    preview: "ignition" as const,
+  },
+  {
+    id: "mono",
+    name: "Mono",
+    href: "/designs/mono/",
+    tagline: "Black Sally energy, Swiss discipline",
+    copy: "Inspired by Micronaut's monochrome mascot mark: ink black-and-white, hairline-rule grids, numbered sections, mono-caps labels — and the flamethrower's fire as the only full-color accent.",
+    chips: ["Monochrome", "Color-flame accent", "Light + dark"],
     previewClass: "bg-white",
-    preview: "light" as const,
+    preview: "mono" as const,
   },
   {
     id: "deep-space",
@@ -35,6 +45,16 @@ const designs = [
     preview: "classic" as const,
   },
   {
+    id: "mission-control",
+    name: "Mission Control",
+    href: "/designs/mission-control/",
+    tagline: "Clean, confident, enterprise-ready",
+    copy: "A modern SaaS look. Warm flame gradients on a crisp canvas, soft shadows, and a dark terminal hero card. Closest in spirit to micronaut.io — but sharper.",
+    chips: ["Gradient accents", "Terminal hero", "Light + dark"],
+    previewClass: "bg-white",
+    preview: "light" as const,
+  },
+  {
     id: "polyglot",
     name: "Polyglot",
     href: "/designs/polyglot/",
@@ -43,26 +63,6 @@ const designs = [
     chips: ["Spectrum gradient", "Perf stats", "Light + dark"],
     previewClass: "bg-ink-950",
     preview: "polyglot" as const,
-  },
-  {
-    id: "ignition",
-    name: "Ignition",
-    href: "/designs/ignition/",
-    tagline: "Editorial startup energy",
-    copy: "Announcement bar, mono uppercase kickers with orange dots, a huge tight editorial headline, dark pill buttons, mascot artwork card with an overlapping code window, and a foundation logo strip.",
-    chips: ["Mono kickers", "Artwork card", "Light + dark"],
-    previewClass: "bg-ink-50",
-    preview: "ignition" as const,
-  },
-  {
-    id: "mono",
-    name: "Mono",
-    href: "/designs/mono/",
-    tagline: "Black Sally energy, Swiss discipline",
-    copy: "Inspired by Micronaut's monochrome mascot mark: ink black-and-white, hairline-rule grids, numbered sections, mono-caps labels — and the flamethrower's fire as the only full-color accent.",
-    chips: ["Monochrome", "Color-flame accent", "Light + dark"],
-    previewClass: "bg-white",
-    preview: "mono" as const,
   },
 ];
 ---
@@ -106,7 +106,8 @@ const designs = [
           grid, live code showcase, workflow, comparisons, and footer — and
           every one supports light and dark mode (use the moon/sun toggle in
           each header). Only the design language changes. The floating switcher
-          on any page jumps between them.
+          on any page jumps between them. Cards are ordered by our design
+          recommendation.
         </p>
       </div>
 
@@ -301,8 +302,13 @@ const designs = [
 
               <div class="flex grow flex-col p-6">
                 <div class="flex items-center justify-between">
-                  <h2 class="font-display text-xl font-bold text-white">
+                  <h2 class="flex items-center gap-2.5 font-display text-xl font-bold text-white">
                     {design.name}
+                    {index === 0 && (
+                      <span class="rounded-full bg-gradient-to-r from-flame-500 to-ember-500 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider">
+                        Recommended
+                      </span>
+                    )}
                   </h2>
                   <span class="font-mono text-xs text-ink-400">
                     0{index + 1}
