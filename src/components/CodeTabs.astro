@@ -6,6 +6,10 @@ import { CODE_EXAMPLES } from "@/lib/site-content";
  * Tabbed code showcase shared by all designs. Every variant renders dual
  * Shiki themes (light + dark); global.css switches token colors when `.dark`
  * is active. The variant only picks the frame style around the code.
+ *
+ * Contrast hierarchy (light mode): the title bar and tab strip form one
+ * white chrome zone (hairline between them) and the code + caption sit on
+ * one tinted inset surface — two clean strata, colored traffic dots for life.
  */
 interface Props {
   variant: "mission-control" | "deep-space" | "classic" | "polyglot" | "ignition";
@@ -17,7 +21,6 @@ const { variant, id = "code-tabs" } = Astro.props;
 interface FrameStyle {
   frame: string;
   bar: string;
-  dot: string;
   file: string;
   tabs: string;
   tab: string;
@@ -32,72 +35,66 @@ const frames: Record<string, FrameStyle> = {
   "mission-control": {
     frame:
       "overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-xl shadow-flame-500/5 dark:border-white/10 dark:bg-ink-900 dark:shadow-black/30",
-    bar: "flex items-center gap-3 border-b border-ink-100 bg-ink-50 px-4 py-2.5 dark:border-white/10 dark:bg-white/[0.04]",
-    dot: "bg-ink-200 dark:bg-white/15",
-    file: "text-xs font-medium text-ink-400 dark:text-ink-300",
+    bar: "flex items-center gap-3 border-b border-ink-100 bg-white px-4 py-2.5 dark:border-white/10 dark:bg-white/[0.04]",
+    file: "font-mono text-xs text-ink-400 dark:text-ink-300",
     tabs: "flex gap-1 border-b border-ink-100 px-3 pt-2 dark:border-white/10",
     tab: "rounded-t-lg px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-600 dark:text-ink-300 dark:hover:text-white",
     tabActive:
       "!text-flame-700 border-b-2 border-flame-500 bg-flame-50/60 dark:!text-flame-400 dark:bg-flame-500/10",
-    panel: "bg-ink-50/50 dark:bg-transparent",
+    panel: "bg-ink-50/60 dark:bg-transparent",
     caption:
-      "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-400 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
+      "border-t border-ink-200/70 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:text-ink-300",
   },
   "deep-space": {
     frame:
       "overflow-hidden rounded-2xl border border-ink-200 bg-white/85 shadow-xl shadow-ink-900/5 backdrop-blur dark:border-white/10 dark:bg-ink-900/80 dark:shadow-2xl dark:shadow-flame-500/10",
-    bar: "flex items-center gap-3 border-b border-ink-100 bg-ink-50/80 px-4 py-2.5 dark:border-white/10 dark:bg-white/[0.04]",
-    dot: "bg-ink-200 dark:bg-white/15",
-    file: "text-xs font-medium text-ink-400 dark:text-ink-300",
+    bar: "flex items-center gap-3 border-b border-ink-100 bg-white/70 px-4 py-2.5 dark:border-white/10 dark:bg-white/[0.04]",
+    file: "font-mono text-xs text-ink-400 dark:text-ink-300",
     tabs: "flex gap-1 border-b border-ink-100 px-3 pt-2 dark:border-white/10",
     tab: "rounded-t-lg px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-700 dark:text-ink-300 dark:hover:text-white",
     tabActive:
       "!text-flame-700 border-b-2 border-flame-500 bg-flame-50/70 dark:!text-flame-400 dark:bg-flame-500/10",
     panel: "bg-ink-50/70 dark:bg-transparent",
     caption:
-      "border-t border-ink-100 bg-ink-50/80 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
+      "border-t border-ink-200/70 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:text-ink-300",
   },
   classic: {
     frame:
       "overflow-hidden rounded-xl border border-ink-200 bg-white shadow-md shadow-black/[0.04] dark:border-ink-700 dark:bg-ink-900",
-    bar: "flex items-center gap-3 border-b border-ink-100 bg-ink-50 px-4 py-2.5 dark:border-ink-700 dark:bg-ink-800/60",
-    dot: "bg-ink-200 dark:bg-ink-600",
-    file: "text-xs font-medium text-ink-400",
+    bar: "flex items-center gap-3 border-b border-ink-100 bg-white px-4 py-2.5 dark:border-ink-700 dark:bg-ink-800/60",
+    file: "font-mono text-xs text-ink-400 dark:text-ink-300",
     tabs: "flex gap-1 border-b border-ink-100 px-3 pt-2 dark:border-ink-700",
     tab: "rounded-t-md px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-700 dark:hover:text-ink-100",
     tabActive:
       "!text-flame-700 border-b-2 border-flame-600 bg-flame-50/60 dark:!text-flame-400 dark:bg-flame-500/10",
     panel: "bg-ink-50/60 dark:bg-transparent",
     caption:
-      "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-ink-700 dark:bg-ink-800/60 dark:text-ink-300",
+      "border-t border-ink-200/70 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-ink-700 dark:text-ink-300",
   },
   ignition: {
     frame:
       "overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-[0_24px_48px_-24px_rgba(16,21,36,0.25)] dark:border-white/10 dark:bg-ink-900",
-    bar: "flex items-center gap-3 border-b border-ink-100 bg-ink-950 px-4 py-3 dark:border-white/10",
-    dot: "bg-white/20",
-    file: "font-mono text-xs uppercase tracking-widest text-ink-400",
+    bar: "flex items-center gap-3 border-b border-ink-100 bg-white px-4 py-3 dark:border-white/10 dark:bg-white/[0.04]",
+    file: "font-mono text-xs uppercase tracking-widest text-ink-400 dark:text-ink-300",
     tabs: "flex gap-1 border-b border-ink-100 px-3 pt-2 dark:border-white/10",
     tab: "rounded-t-lg px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-ink-400 transition hover:text-ink-800 dark:hover:text-white",
-    tabActive:
-      "!text-ink-950 border-b-2 border-flame-500 dark:!text-white",
+    tabActive: "!text-ink-950 border-b-2 border-flame-500 dark:!text-white",
     panel: "bg-ink-50/60 dark:bg-transparent",
     caption:
-      "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
+      "border-t border-ink-200/70 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:text-ink-300",
   },
   polyglot: {
     frame:
       "overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-xl shadow-python-blue/10 dark:border-white/10 dark:bg-ink-900 dark:shadow-black/30",
-    bar: "flex items-center gap-3 border-b border-ink-100 bg-gradient-to-r from-python-blue/10 via-transparent to-flame-500/10 px-4 py-2.5 dark:border-white/10 dark:from-python-blue/20 dark:to-flame-500/20",
-    dot: "bg-ink-200 dark:bg-white/15",
-    file: "text-xs font-medium text-ink-400 dark:text-ink-300",
+    bar: "flex items-center gap-3 border-b border-ink-100 bg-gradient-to-r from-python-blue/[0.06] via-white to-flame-500/[0.06] px-4 py-2.5 dark:border-white/10 dark:from-python-blue/15 dark:via-transparent dark:to-flame-500/15",
+    file: "font-mono text-xs text-ink-400 dark:text-ink-300",
     tabs: "flex gap-1 border-b border-ink-100 px-3 pt-2 dark:border-white/10",
     tab: "rounded-t-lg px-4 py-2 text-sm font-medium text-ink-400 transition hover:text-ink-700 dark:text-ink-300 dark:hover:text-white",
     tabActive:
       "!text-python-blue border-b-2 border-python-blue bg-python-blue/5 dark:!text-flame-400 dark:border-flame-500 dark:bg-flame-500/10",
     panel: "bg-ink-50/60 dark:bg-transparent",
     caption:
-      "border-t border-ink-100 bg-ink-50 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-ink-300",
+      "border-t border-ink-200/70 px-4 py-3 text-xs leading-5 text-ink-500 dark:border-white/10 dark:text-ink-300",
   },
 };
 
@@ -107,14 +104,14 @@ const s = frames[variant]!;
 <div class:list={["code-tabs", s.frame]} data-code-tabs={id}>
   <div class={s.bar}>
     <span class="flex gap-1.5">
-      <span class:list={["size-2.5 rounded-full", s.dot]}></span>
-      <span class:list={["size-2.5 rounded-full", s.dot]}></span>
-      <span class:list={["size-2.5 rounded-full", s.dot]}></span>
+      <span class="size-2.5 rounded-full bg-ember-500/90"></span>
+      <span class="size-2.5 rounded-full bg-python-yellow/90"></span>
+      <span class="size-2.5 rounded-full bg-flame-400/90"></span>
     </span>
     {
       CODE_EXAMPLES.map((example, index) => (
         <span
-          class:list={["font-mono", s.file, index > 0 && "hidden"]}
+          class:list={[s.file, index > 0 && "hidden"]}
           data-tab-file={example.id}
         >
           {example.filename}

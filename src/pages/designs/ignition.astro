@@ -489,7 +489,10 @@ const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
     </section>
 
     <!-- Personas + honest notes -->
-    <section id="teams" class="border-b border-ink-200/70 dark:border-white/10">
+    <section
+      id="teams"
+      class="border-b border-ink-200/70 bg-white dark:border-white/10 dark:bg-ink-900/40"
+    >
       <div class="mx-auto max-w-7xl px-5 py-20 md:py-24">
         <p
           class="flex items-center gap-2.5 font-mono text-[0.78rem] font-semibold uppercase tracking-[0.25em] text-ink-700 dark:text-ink-300"
@@ -505,7 +508,7 @@ const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
         <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {
             PERSONAS.map((persona) => (
-              <div class="rounded-2xl bg-white p-6 ring-1 ring-ink-200 dark:bg-ink-900 dark:ring-white/10">
+              <div class="rounded-2xl bg-ink-50 p-6 ring-1 ring-ink-200 dark:bg-ink-950 dark:ring-white/10">
                 <p class="font-mono text-xs font-bold uppercase tracking-[0.15em] text-ember-500">
                   {persona.role}
                 </p>
@@ -516,7 +519,7 @@ const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
             ))
           }
         </div>
-        <div class="mt-12 rounded-2xl bg-white p-8 ring-1 ring-ink-200 dark:bg-ink-900 dark:ring-white/10">
+        <div class="mt-12 rounded-2xl bg-ink-50 p-8 ring-1 ring-ink-200 dark:bg-ink-950 dark:ring-white/10">
           <h3 class="text-lg font-bold tracking-tight text-ink-950 dark:text-white">
             Straight answers before you adopt
           </h3>
