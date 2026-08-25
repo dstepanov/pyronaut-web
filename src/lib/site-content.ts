@@ -1,6 +1,6 @@
 /**
- * Shared marketing content for all three Pyronaut design variants.
- * Sourced from the Pyronaut Master Positioning Brief v0.8.
+ * Shared marketing content for every Pyronaut design variant.
+ * Derived from the Pyronaut positioning material.
  */
 
 export const SITE_NAME = "Pyronaut";

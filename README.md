@@ -31,8 +31,8 @@ other variants plus `src/components/DesignSwitcher.astro`.
 ## Project layout
 
 - `src/lib/site-content.ts` — all shared copy (hero, features, workflow,
-  code examples, personas, footer), sourced from the
-  [positioning brief](resources/Pyronaut-Master-Positioning-Brief-v0.8.md)
+  code examples, personas, footer), derived from the Pyronaut positioning
+  material
 - `src/components/CodeTabs.astro` — tabbed code showcase with dual Shiki
   themes (one frame variant per design; tokens switch with dark mode)
 - `src/components/ThemeToggle.astro` — light/dark toggle button
