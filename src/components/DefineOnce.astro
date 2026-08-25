@@ -1,11 +1,6 @@
 ---
 import { DEFINE_ONCE } from "@/lib/site-content";
 
-/**
- * §12 of the positioning brief: "define once, use in many places" is the
- * strongest differentiator, so it gets a visual — one source definition
- * fanning out into every concern it drives.
- */
 interface Props {
   /** adaptive = light with dark: overrides; dark = always-dark section */
   tone?: "adaptive" | "dark";

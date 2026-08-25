@@ -14,7 +14,6 @@ import {
   FEATURES,
   FOOTER_COLUMNS,
   HERO,
-  HONEST_NOTES,
   PERSONAS,
   SITE_NAME,
   STACK_COMPARISON,
@@ -411,7 +410,7 @@ const navLinks = [
       </div>
     </section>
 
-    <!-- Personas + honest notes -->
+    <!-- Personas -->
     <section id="teams" class="border-b border-ink-200/70 dark:border-white/10">
       <div class="mx-auto max-w-7xl px-5 py-20">
         <h2
@@ -432,27 +431,6 @@ const navLinks = [
               </div>
             ))
           }
-        </div>
-        <div
-          class="mt-14 rounded-2xl border border-ink-200 bg-white p-8 dark:border-white/10 dark:bg-white/[0.03]"
-        >
-          <h3 class="font-display text-lg font-semibold text-ink-900 dark:text-white">
-            Straight answers before you adopt
-          </h3>
-          <div class="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {
-              HONEST_NOTES.map((note) => (
-                <div>
-                  <p class="text-sm font-semibold text-flame-700 dark:text-flame-300">
-                    {note.title}
-                  </p>
-                  <p class="mt-2 text-sm leading-6 text-ink-500 dark:text-ink-300">
-                    {note.copy}
-                  </p>
-                </div>
-              ))
-            }
-          </div>
         </div>
       </div>
     </section>

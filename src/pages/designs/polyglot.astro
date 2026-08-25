@@ -14,7 +14,6 @@ import {
   FEATURES,
   FOOTER_COLUMNS,
   HERO,
-  HONEST_NOTES,
   PERSONAS,
   SITE_NAME,
   STACK_COMPARISON,
@@ -34,10 +33,6 @@ const navLinks = [
   { label: "Teams", href: "#teams" },
 ];
 
-/*
- * Capability facts only — the positioning brief (§38–39) forbids
- * performance numbers until they are backed by published benchmarks.
- */
 const stats = [
   { value: "1 CLI", label: "whole workflow" },
   { value: "8", label: "workflow stages" },
@@ -486,7 +481,7 @@ const layerTones: Record<string, string> = {
       </div>
     </section>
 
-    <!-- Personas + honest notes -->
+    <!-- Personas -->
     <section id="teams" class="border-b border-ink-200 bg-white dark:border-ink-700 dark:bg-ink-950">
       <div class="mx-auto max-w-7xl px-5 py-18 md:py-20">
         <h2
@@ -517,25 +512,6 @@ const layerTones: Record<string, string> = {
               </div>
             ))
           }
-        </div>
-        <div class="mt-14 rounded-xl border border-ink-200 bg-ink-50/70 p-8 dark:border-ink-700 dark:bg-ink-900">
-          <h3 class="font-display text-lg font-semibold text-ink-900 dark:text-white">
-            Straight answers before you adopt
-          </h3>
-          <div class="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {
-              HONEST_NOTES.map((note) => (
-                <div>
-                  <p class="text-sm font-semibold text-ink-800 dark:text-ink-100">
-                    {note.title}
-                  </p>
-                  <p class="mt-2 text-sm leading-6 text-ink-500 dark:text-ink-300">
-                    {note.copy}
-                  </p>
-                </div>
-              ))
-            }
-          </div>
         </div>
       </div>
     </section>
