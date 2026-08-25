@@ -5,7 +5,7 @@
 export const SITE_NAME = "Pyronaut";
 
 export const SITE_DESCRIPTION =
-  "Pyronaut is an integrated application platform for Python, built on the Micronaut application model. Build the Python application without having to build the application platform around it.";
+  "Pyronaut is an integrated application platform for Python, built on Micronaut. Build the Python application without having to build the application platform around it.";
 
 export const HERO = {
   eyebrow: "Integrated application platform for Python",
