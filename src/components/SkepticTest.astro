@@ -2,11 +2,6 @@
 import Glyph from "@/components/Glyph.astro";
 import { SKEPTIC } from "@/lib/site-content";
 
-/**
- * §33 of the positioning brief: every claim must survive the skeptical
- * principal engineer. This block asks their exact question and answers it
- * with the concrete "what you stop maintaining" list.
- */
 interface Props {
   tone?: "adaptive" | "dark";
 }
@@ -40,7 +35,6 @@ const check =
 ---
 
 <div class={box}>
-  <p class={kicker}>The skeptical principal engineer test</p>
   <p class={question}>&ldquo;{SKEPTIC.question}&rdquo;</p>
   <p class={intro}>{SKEPTIC.intro}</p>
   <ul class="mt-5 grid gap-3 sm:grid-cols-2">

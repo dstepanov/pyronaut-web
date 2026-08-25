@@ -1,12 +1,11 @@
 /**
  * Shared marketing content for every Pyronaut design variant.
- * Derived from the Pyronaut positioning material.
  */
 
 export const SITE_NAME = "Pyronaut";
 
 export const SITE_DESCRIPTION =
-  "Pyronaut is an integrated application platform for Python, built on the Micronaut application model. Build the Python application without having to build the application platform around it.";
+  "Pyronaut is an integrated application platform for Python, built on Micronaut. Build the Python application without having to build the application platform around it.";
 
 export const HERO = {
   eyebrow: "Integrated application platform for Python",
@@ -37,7 +36,7 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "One application workflow",
-    copy: "create → dev → test → validate-config → build. One CLI coordinates the whole lifecycle.",
+    copy: "create → dev → test → validate-config → build. One CLI from project creation through packaging.",
     icon: "workflow",
     href: "/docs/cli/",
   },
@@ -230,14 +229,10 @@ $ pyronaut build --native
 
 export const CODE_PROOFS = [
   "Dependency injection resolved from build-time metadata",
-  "Wiring and configuration errors surface at build time, not in production",
+  "Wiring and configuration errors can be detected at build time",
   "Tests run with the same services the application depends on",
 ];
 
-/**
- * §12 of the brief: "Define it once and use it in many places" is called out
- * as stronger than simply packaging tools together — so it gets a visual.
- */
 export const DEFINE_ONCE = {
   source: "One Python dataclass",
   targets: [
@@ -251,7 +246,6 @@ export const DEFINE_ONCE = {
   ],
 };
 
-/** §27: best-fit qualification signals, verbatim from the brief. */
 export const BEST_FIT_SIGNALS = [
   "Every Python service is configured differently.",
   "Our internal Python template has become a platform product.",
@@ -261,14 +255,13 @@ export const BEST_FIT_SIGNALS = [
   "We keep rebuilding Docker, CI, configuration, and deployment conventions.",
 ];
 
-/** §33: the skeptical principal engineer test, answered concretely. */
 export const SKEPTIC = {
   question:
     "Why can't I just use FastAPI + Uvicorn + Pydantic + uv + pytest + Testcontainers + Docker?",
   intro:
     "You can — every one of those tools is excellent. The honest answer is about what you stop maintaining:",
   answers: [
-    "You no longer maintain the integrations between framework, server, validation, testing, and packaging.",
+    "Pyronaut reduces the integration work between framework, server, validation, testing, and packaging.",
     "Configuration is checked automatically before packaging — for each environment.",
     "The same metadata drives HTTP, validation, serialization, and OpenAPI.",
     "Test infrastructure is managed as part of development and testing.",
@@ -277,7 +270,6 @@ export const SKEPTIC = {
   ],
 };
 
-/** §44: the adjacent audience — Micronaut teams adopting Python. */
 export const MICRONAUT_AUDIENCE = {
   kicker: "Already building on Micronaut?",
   copy: "Add Python without adding a second application platform — use Python on the Micronaut platform you already know.",
@@ -388,25 +380,6 @@ export const STACK_COMPARISON = {
     ],
   },
 };
-
-export const HONEST_NOTES = [
-  {
-    title: "Python on GraalPy",
-    copy: "Pyronaut runs Python on GraalPy, not CPython. Confirm the packages you depend on work with GraalPy before adopting.",
-  },
-  {
-    title: "Micronaut is not hidden",
-    copy: "You will meet Micronaut, Jakarta, and Maven concepts. That is the programming model, not an implementation detail.",
-  },
-  {
-    title: "Two dependency ecosystems",
-    copy: "Python packages keep pip, uv, and pyproject.toml. Platform dependencies come from Maven. You work with both.",
-  },
-  {
-    title: "The trade-off",
-    copy: "You give up some freedom to choose every component independently in exchange for one platform and a more consistent way of building.",
-  },
-];
 
 export const FOOTER_COLUMNS = [
   {
