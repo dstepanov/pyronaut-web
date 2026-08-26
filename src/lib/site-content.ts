@@ -343,7 +343,7 @@ export const PERSONAS: Persona[] = [
   {
     role: "Engineering leadership",
     value:
-      "Reduce duplicated platform engineering and the number of application patterns teams need to support.",
+      "Reduce duplicated platform engineering and the number of patterns teams need to support.",
   },
 ];
 
