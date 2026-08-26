@@ -128,14 +128,14 @@ export const CODE_EXAMPLES: CodeExample[] = [
     filename: "rockets.py",
     language: "python",
     caption:
-      "Micronaut annotations on plain Python — routing, DI, validation, and serialization from one definition.",
+      "Use Micronaut annotations directly from Python for routing, dependency injection, validation, and serialization.",
     code: `from dataclasses import dataclass
 
-from pyronaut.http import Controller, Get, Post, Body
-from pyronaut.inject import Singleton
-from pyronaut.serde import Serdeable
-from pyronaut.validation import Validated, NotBlank, Positive
-
+from micronaut.http.annotation import Body, Controller, Get, Post
+from micronaut.serde.annotation import Serdeable
+from micronaut.validation import Validated
+from jakarta.inject import Singleton
+from jakarta.validation.constraints import NotBlank, Positive
 
 @Serdeable
 @dataclass
@@ -234,7 +234,7 @@ export const CODE_PROOFS = [
 ];
 
 export const DEFINE_ONCE = {
-  source: "One Python dataclass",
+  source: "Python types and annotations",
   targets: [
     "HTTP routing",
     "Validation",
