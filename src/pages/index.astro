@@ -2,7 +2,6 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import CodeTabs from "@/components/CodeTabs.astro";
 import DefineOnce from "@/components/DefineOnce.astro";
-import DesignSwitcher from "@/components/DesignSwitcher.astro";
 import Glyph from "@/components/Glyph.astro";
 import MicronautBand from "@/components/MicronautBand.astro";
 import SkepticTest from "@/components/SkepticTest.astro";
@@ -306,7 +305,7 @@ const foundations = ["Python", "Micronaut", "GraalPy", "GraalVM"];
             <DefineOnce />
           </div>
         </div>
-        <CodeTabs variant="ignition" id="ig-code" />
+        <CodeTabs id="ig-code" />
       </div>
     </section>
 
@@ -559,5 +558,4 @@ const foundations = ["Python", "Micronaut", "GraalPy", "GraalVM"];
     </div>
   </footer>
 
-  <DesignSwitcher current="ignition" />
 </BaseLayout>
