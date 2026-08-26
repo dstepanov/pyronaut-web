@@ -333,7 +333,7 @@ export const PERSONAS: Persona[] = [
   {
     role: "Architect",
     value:
-      "Fewer technology combinations and fewer different ways of building the same kind of service.",
+      "Give teams one consistent way to build and maintain production Python services at scale.",
   },
   {
     role: "Platform engineering",
@@ -343,7 +343,7 @@ export const PERSONAS: Persona[] = [
   {
     role: "Engineering leadership",
     value:
-      "Less duplicated platform engineering and a smaller support surface across the organization.",
+      "Reduce duplicated platform engineering and the number of application patterns teams need to support.",
   },
 ];
 
