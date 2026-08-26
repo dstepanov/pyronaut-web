@@ -257,16 +257,16 @@ export const BEST_FIT_SIGNALS = [
 
 export const SKEPTIC = {
   question:
-    "Why can't I just use FastAPI + Uvicorn + Pydantic + uv + pytest + Testcontainers + Docker?",
+    "Why not assemble a stack from the Python frameworks and tools I already know?",
   intro:
-    "You can — every one of those tools is excellent. The honest answer is about what you stop maintaining:",
+    "You can. Those tools may all be excellent. The trade-off is how much integration and platform work your team wants to maintain itself:",
   answers: [
     "Pyronaut reduces the integration work between framework, server, validation, testing, and packaging.",
-    "Configuration is checked automatically before packaging — for each environment.",
-    "The same metadata drives HTTP, validation, serialization, and OpenAPI.",
+    "Configuration is checked automatically during dev, run, test, and native builds.",
+    "The same Python types and metadata can be used across HTTP, validation, serialization, and OpenAPI.",
     "Test infrastructure is managed as part of development and testing.",
     "The same project produces wheel, container, native, and Crema artifacts.",
-    "Wiring problems are found before the service reaches production.",
+    "Wiring problems can be detected before the service reaches production.",
   ],
 };
 
@@ -288,21 +288,21 @@ export interface DeepDive {
 
 export const DEEP_DIVES: DeepDive[] = [
   {
-    title: "Prepare more before the application starts",
-    copy: "Pyronaut processes source and metadata at build time, where Python frameworks usually discover behavior at runtime.",
+    title: "Process at build time",
+    copy: "Pyronaut processes source and metadata at build time, before the application starts.",
     bullets: [
       "Earlier error detection",
       "Stronger IDE support and stubs",
-      "Less runtime reflection",
-      "Predictable native packaging",
+      "Less reliance on runtime reflection",
+      "Native packaging support",
     ],
     linkLabel: "How source processing works",
     href: "/docs/source-processing/",
     icon: "bolt",
   },
   {
-    title: "Validate before production, not in it",
-    copy: "Check configuration for dev, test, and production environments — and validate the whole dependency injection graph — before deploying.",
+    title: "Validate before production",
+    copy: "Check configuration for dev, test, and production environments, and optionally validate the dependency injection graph before deploying.",
     bullets: [
       "validate-config per environment",
       "DI graph validation",
@@ -314,7 +314,7 @@ export const DEEP_DIVES: DeepDive[] = [
     icon: "shield",
   },
   {
-    title: "Delivery is part of the platform",
+    title: "Package for production",
     copy: "From Python source through tested and validated production artifact — pick the packaging that fits the workload.",
     bullets: [
       "JVM wheel or container image",
@@ -358,7 +358,7 @@ export const PERSONAS: Persona[] = [
 
 export const STACK_COMPARISON = {
   conventional: {
-    title: "Assemble it yourself",
+    title: "A representative Python stack",
     items: [
       "FastAPI + Uvicorn",
       "Pydantic + Pydantic Settings",
