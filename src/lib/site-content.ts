@@ -246,15 +246,6 @@ export const DEFINE_ONCE = {
   ],
 };
 
-export const BEST_FIT_SIGNALS = [
-  "Every Python service is configured differently.",
-  "Our internal Python template has become a platform product.",
-  "The API is easy. Everything required to ship it reliably is expensive.",
-  "Local development and CI behave differently.",
-  "Our test infrastructure is difficult to maintain.",
-  "We keep rebuilding Docker, CI, configuration, and deployment conventions.",
-];
-
 export const SKEPTIC = {
   question:
     "Why not assemble a stack from the Python frameworks and tools I already know?",
