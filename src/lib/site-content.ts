@@ -107,7 +107,7 @@ export const WORKFLOW: WorkflowStage[] = [
   },
   {
     command: "pyronaut build",
-    title: "Ship",
+    title: "Package",
     copy: "Produce a wheel, container image, or native executable.",
   },
 ];
