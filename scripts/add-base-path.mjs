@@ -24,7 +24,10 @@ for (const file of walk("dist")) {
   if (!file.endsWith(".html")) continue;
   const html = readFileSync(file, "utf8");
   // href="/x", src="/x", and og content="/x" — but never protocol-relative "//".
-  const out = html.replace(/(href|src|content)="\/(?!\/)/g, `$1="${base}/`);
+  const out = html
+    .replace(/(href|src|content)="\/(?!\/)/g, `$1="${base}/`)
+    // Astro redirect pages: <meta http-equiv="refresh" content="0;url=/...">
+    .replace(/content="(\d+);\s*url=\/(?!\/)/g, `content="$1;url=${base}/`);
   if (out !== html) {
     writeFileSync(file, out);
     rewritten += 1;

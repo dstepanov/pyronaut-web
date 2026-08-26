@@ -10,9 +10,10 @@ and TypeScript, mirroring the page structure of `micronaut-web`.
 
 The site currently ships **six complete design directions** that share the
 same structure and content (hero → features → code showcase → workflow →
-deep dives → stack comparison → personas → CTA → footer). The root page
-(`/`) is a design chooser, and every design page has a floating switcher for
-quick comparison. **Every design supports light and dark mode** — the
+deep dives → stack comparison → personas → CTA → footer). **Ignition is the
+selected design and is served at the root (`/`)**; the remaining candidates
+stay at `/designs/<name>/`, with the chooser at `/designs/` and a floating
+switcher on every page for quick comparison. **Every design supports light and dark mode** — the
 moon/sun toggle in each header persists the choice (`localStorage`,
 class-based Tailwind `dark:` variant, falls back to the OS preference).
 
@@ -22,7 +23,7 @@ class-based Tailwind `dark:` variant, falls back to the OS preference).
 | Deep Space | `/designs/deep-space/` | Space theme: starfield, nebula glow, glass cards, mascot porthole |
 | Classic | `/designs/classic/` | Deliberately micronaut.io-like: bordered sections, numbered-steps hero card, outline badges |
 | Polyglot | `/designs/polyglot/` | Micronaut structure × GraalVM energy: navy gradient-mesh hero, perf stats, runtime layer diagram, blue→violet→flame spectrum |
-| Ignition | `/designs/ignition/` | Editorial startup style: announcement bar, mono uppercase kickers, huge tight headline, artwork card with overlapping code window, foundation logo strip |
+| Ignition **(selected)** | `/` | Editorial startup style: announcement bar, mono uppercase kickers, huge tight headline, artwork card with overlapping code window, foundation logo strip |
 | Mono | `/designs/mono/` | Inspired by Micronaut's black Sally mark: ink monochrome, Swiss hairline grids, numbered sections — the mascot's flame is the only full-color accent |
 
 Once a direction is chosen, promote that page's markup to `/` and delete the
@@ -39,7 +40,9 @@ other variants plus `src/components/DesignSwitcher.astro`.
 - `src/components/Glyph.astro` — inline stroke icon set
 - `src/layouts/BaseLayout.astro` — shared head/meta/fonts + pre-paint theme
   script
-- `src/pages/designs/*.astro` — the three design candidates
+- `src/pages/index.astro` — Ignition, the selected design (site homepage)
+- `src/pages/designs/index.astro` — the design chooser
+- `src/pages/designs/*.astro` — the remaining design candidates
 - `public/pyronaut-assets/` — logos and mascot derived from `resources/`
 
 ## Commands
