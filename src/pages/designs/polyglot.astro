@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import BestFitSignals from "@/components/BestFitSignals.astro";
 import CodeTabs from "@/components/CodeTabs.astro";
 import DefineOnce from "@/components/DefineOnce.astro";
 import DesignSwitcher from "@/components/DesignSwitcher.astro";
@@ -236,9 +235,8 @@ const layerTones: Record<string, string> = {
             One platform, designed to work together
           </h2>
           <p class="max-w-lg text-base leading-7 text-ink-500 dark:text-ink-300">
-            Configuration, testing, validation, infrastructure, and packaging —
-            handled one consistent way, instead of assembled and maintained by
-            hand.
+            Configuration, testing, validation, infrastructure, and
+            packaging - handled one consistent way.
           </p>
         </div>
         <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -294,9 +292,9 @@ const layerTones: Record<string, string> = {
             Python that uses Micronaut directly
           </h2>
           <p class="mt-4 text-base leading-7 text-ink-500 dark:text-ink-300">
-            Write a controller, inject services, and test the running
-            application — with dataclasses, type hints, and pytest you already
-            know.
+            Write controllers and inject services with familiar Python constructs
+            like dataclasses and type hints, then test the running application with
+            pytest.
           </p>
           <ul class="mt-7 grid gap-3">
             {
@@ -431,10 +429,9 @@ const layerTones: Record<string, string> = {
           <p class="mt-4 text-base leading-7 text-ink-300">
             Python&rsquo;s flexibility is a strength, and every component in a
             hand-assembled stack may be excellent. The cost is the repeated
-            integration work between them — and someone has to own it.
+            integration work between them, and someone has to own it.
           </p>
         </div>
-        <BestFitSignals tone="dark" />
         <div class="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
           <div class="rounded-xl border border-white/10 bg-white/[0.04] p-7">
             <h3 class="font-display text-lg font-semibold text-ink-300">

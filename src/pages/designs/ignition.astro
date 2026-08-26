@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import BestFitSignals from "@/components/BestFitSignals.astro";
 import CodeTabs from "@/components/CodeTabs.astro";
 import DefineOnce from "@/components/DefineOnce.astro";
 import DesignSwitcher from "@/components/DesignSwitcher.astro";
@@ -35,36 +34,13 @@ const navLinks = [
 
 const heroChecks = ["One application model", "Build-time processing", "JVM & native packaging"];
 
-const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
+const foundations = ["Python", "Micronaut", "GraalPy", "GraalVM"];
 ---
 
 <BaseLayout
   title={`${SITE_NAME} — Integrated application platform for Python`}
   bodyClass="bg-ink-50 font-sans text-ink-900 antialiased dark:bg-ink-950 dark:text-ink-100"
 >
-  <!-- Announcement bar -->
-  <div class="bg-ink-950 text-white dark:border-b dark:border-white/10">
-    <div
-      class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3 px-5 py-2.5 text-sm"
-    >
-      <span
-        class="rounded-md bg-ember-500 px-2 py-0.5 font-mono text-[0.65rem] font-bold uppercase tracking-wider"
-      >
-        New
-      </span>
-      <span class="text-ink-200">
-        Pyronaut brings the Micronaut application model to Python.
-      </span>
-      <a
-        href="#features"
-        class="inline-flex items-center gap-1.5 font-semibold text-white transition hover:text-flame-400"
-      >
-        See what's included
-        <Glyph name="arrow-right" class="size-4 text-flame-400" />
-      </a>
-    </div>
-  </div>
-
   <!-- Header -->
   <header
     class="sticky top-0 z-40 border-b border-ink-200/70 bg-ink-50/90 backdrop-blur-lg dark:border-white/10 dark:bg-ink-950/90"
@@ -233,7 +209,7 @@ const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
           class="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 md:flex-row md:items-center md:justify-between"
         >
           <p class="text-sm text-ink-500 dark:text-ink-400">
-            Built on a production-proven application foundation
+            Built on a proven application foundation
           </p>
           <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
             {
@@ -265,8 +241,8 @@ const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
             One platform, designed to work together
           </h2>
           <p class="max-w-md text-base leading-7 text-ink-500 dark:text-ink-300">
-            Configuration, testing, validation, infrastructure, and packaging —
-            handled one consistent way.
+            Configuration, testing, validation, infrastructure, and
+            packaging - handled one consistent way.
           </p>
         </div>
         <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -309,9 +285,9 @@ const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
             Python that uses Micronaut directly
           </h2>
           <p class="mt-5 text-base leading-7 text-ink-500 dark:text-ink-300">
-            Write a controller, inject services, and test the running
-            application — with dataclasses, type hints, and pytest you already
-            know.
+            Write controllers and inject services with familiar Python constructs
+            like dataclasses and type hints, then test the running application with
+            pytest.
           </p>
           <ul class="mt-8 grid gap-3.5">
             {
@@ -418,9 +394,8 @@ const foundations = ["Micronaut", "GraalPy", "GraalVM", "Python"];
         <p class="mt-5 max-w-xl text-base leading-7 text-ink-300">
           Python&rsquo;s flexibility is a strength, and every component in a
           hand-assembled stack may be excellent. The cost is the repeated
-          integration work between them — and someone has to own it.
+          integration work between them, and someone has to own it.
         </p>
-        <BestFitSignals tone="dark" />
         <div class="mt-12 grid gap-6 md:grid-cols-2">
           <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-8">
             <h3 class="font-mono text-sm font-bold uppercase tracking-[0.2em] text-ink-400">

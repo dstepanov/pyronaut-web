@@ -42,37 +42,37 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "Prepare before startup",
-    copy: "DI metadata, serialization, and OpenAPI are processed at build time — not discovered at runtime.",
+    copy: "DI metadata, serialization, and OpenAPI are processed at build time, before application startup.",
     icon: "bolt",
     href: "/docs/source-processing/",
   },
   {
-    title: "Define once, use everywhere",
-    copy: "A Python dataclass drives routing, validation, serialization, OpenAPI, and editor completion.",
+    title: "Define once, reuse",
+    copy: "Use the same Python types for HTTP, validation, serialization, OpenAPI, and editor support.",
     icon: "layers",
     href: "/docs/serialization/",
   },
   {
-    title: "Testing with the application",
+    title: "Application testing",
     copy: "pytest integrated with Micronaut Test, an embedded server, and real test infrastructure.",
     icon: "flask",
     href: "/docs/testing/",
   },
   {
     title: "Test Resources built in",
-    copy: "PostgreSQL, Kafka, or Redis appear for dev and test runs — no compose files or fixtures.",
+    copy: "Start supported services for development and tests with less custom setup.",
     icon: "database",
     href: "/docs/test-resources/",
   },
   {
-    title: "Production validation",
+    title: "Validate before production",
     copy: "Validate configuration and the dependency injection graph before the service ships.",
     icon: "shield",
     href: "/docs/validation/",
   },
   {
-    title: "Native packaging paths",
-    copy: "JVM wheel, container image, GraalVM native executable, or a reusable Crema runtime.",
+    title: "Packaging options",
+    copy: "JVM wheel, JVM container image, native executable, native container image, or a reusable Crema runtime.",
     icon: "rocket",
     href: "/docs/packaging/",
   },
@@ -107,7 +107,7 @@ export const WORKFLOW: WorkflowStage[] = [
   },
   {
     command: "pyronaut build",
-    title: "Ship",
+    title: "Package",
     copy: "Produce a wheel, container image, or native executable.",
   },
 ];
@@ -128,14 +128,14 @@ export const CODE_EXAMPLES: CodeExample[] = [
     filename: "rockets.py",
     language: "python",
     caption:
-      "Micronaut annotations on plain Python — routing, DI, validation, and serialization from one definition.",
+      "Use Micronaut annotations directly from Python for routing, dependency injection, validation, and serialization.",
     code: `from dataclasses import dataclass
 
-from pyronaut.http import Controller, Get, Post, Body
-from pyronaut.inject import Singleton
-from pyronaut.serde import Serdeable
-from pyronaut.validation import Validated, NotBlank, Positive
-
+from micronaut.http.annotation import Body, Controller, Get, Post
+from micronaut.serde.annotation import Serdeable
+from micronaut.validation import Validated
+from jakarta.inject import Singleton
+from jakarta.validation.constraints import NotBlank, Positive
 
 @Serdeable
 @dataclass
@@ -234,7 +234,7 @@ export const CODE_PROOFS = [
 ];
 
 export const DEFINE_ONCE = {
-  source: "One Python dataclass",
+  source: "Python types and annotations",
   targets: [
     "HTTP routing",
     "Validation",
@@ -246,33 +246,24 @@ export const DEFINE_ONCE = {
   ],
 };
 
-export const BEST_FIT_SIGNALS = [
-  "Every Python service is configured differently.",
-  "Our internal Python template has become a platform product.",
-  "The API is easy. Everything required to ship it reliably is expensive.",
-  "Local development and CI behave differently.",
-  "Our test infrastructure is difficult to maintain.",
-  "We keep rebuilding Docker, CI, configuration, and deployment conventions.",
-];
-
 export const SKEPTIC = {
   question:
-    "Why can't I just use FastAPI + Uvicorn + Pydantic + uv + pytest + Testcontainers + Docker?",
+    "Why not assemble a stack from the Python frameworks and tools I already know?",
   intro:
-    "You can — every one of those tools is excellent. The honest answer is about what you stop maintaining:",
+    "You can. Those tools may all be excellent. The trade-off is how much integration and platform work your team wants to maintain itself:",
   answers: [
     "Pyronaut reduces the integration work between framework, server, validation, testing, and packaging.",
-    "Configuration is checked automatically before packaging — for each environment.",
-    "The same metadata drives HTTP, validation, serialization, and OpenAPI.",
+    "Configuration is checked automatically during dev, run, test, and native builds.",
+    "The same Python types and metadata can be used across HTTP, validation, serialization, and OpenAPI.",
     "Test infrastructure is managed as part of development and testing.",
     "The same project produces wheel, container, native, and Crema artifacts.",
-    "Wiring problems are found before the service reaches production.",
+    "Wiring problems can be detected before the service reaches production.",
   ],
 };
 
 export const MICRONAUT_AUDIENCE = {
   kicker: "Already building on Micronaut?",
-  copy: "Add Python without adding a second application platform — use Python on the Micronaut platform you already know.",
+  copy: "Add Python without adding a second application platform. Use Python on the Micronaut platform you already know.",
   linkLabel: "Pyronaut for Micronaut teams",
   href: "/docs/micronaut-teams/",
 };
@@ -288,21 +279,21 @@ export interface DeepDive {
 
 export const DEEP_DIVES: DeepDive[] = [
   {
-    title: "Prepare more before the application starts",
-    copy: "Pyronaut processes source and metadata at build time, where Python frameworks usually discover behavior at runtime.",
+    title: "Process at build time",
+    copy: "Pyronaut processes source and metadata at build time, before the application starts.",
     bullets: [
       "Earlier error detection",
       "Stronger IDE support and stubs",
-      "Less runtime reflection",
-      "Predictable native packaging",
+      "Less reliance on runtime reflection",
+      "Native packaging support",
     ],
     linkLabel: "How source processing works",
     href: "/docs/source-processing/",
     icon: "bolt",
   },
   {
-    title: "Validate before production, not in it",
-    copy: "Check configuration for dev, test, and production environments — and validate the whole dependency injection graph — before deploying.",
+    title: "Validate before production",
+    copy: "Check configuration for dev, test, and production environments, and optionally validate the dependency injection graph before deploying.",
     bullets: [
       "validate-config per environment",
       "DI graph validation",
@@ -314,8 +305,8 @@ export const DEEP_DIVES: DeepDive[] = [
     icon: "shield",
   },
   {
-    title: "Delivery is part of the platform",
-    copy: "From Python source through tested and validated production artifact — pick the packaging that fits the workload.",
+    title: "Package for production",
+    copy: "From Python source through a tested and validated production artifact. Pick the packaging that fits the workload.",
     bullets: [
       "JVM wheel or container image",
       "GraalVM native executable",
@@ -342,7 +333,7 @@ export const PERSONAS: Persona[] = [
   {
     role: "Architect",
     value:
-      "Fewer technology combinations and fewer different ways of building the same kind of service.",
+      "Give teams one consistent way to build and maintain production Python services at scale.",
   },
   {
     role: "Platform engineering",
@@ -352,13 +343,13 @@ export const PERSONAS: Persona[] = [
   {
     role: "Engineering leadership",
     value:
-      "Less duplicated platform engineering and a smaller support surface across the organization.",
+      "Reduce duplicated platform engineering and the number of patterns teams need to support.",
   },
 ];
 
 export const STACK_COMPARISON = {
   conventional: {
-    title: "Assemble it yourself",
+    title: "A representative Python stack",
     items: [
       "FastAPI + Uvicorn",
       "Pydantic + Pydantic Settings",

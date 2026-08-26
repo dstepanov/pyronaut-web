@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import BestFitSignals from "@/components/BestFitSignals.astro";
 import CodeTabs from "@/components/CodeTabs.astro";
 import DefineOnce from "@/components/DefineOnce.astro";
 import DesignSwitcher from "@/components/DesignSwitcher.astro";
@@ -176,8 +175,8 @@ const sectionTitle =
           <span class={sectionIndex}>01</span>
           <h2 class={sectionTitle}>One platform, designed to work together</h2>
           <p class="ml-auto hidden max-w-xs text-sm leading-6 text-ink-500 dark:text-ink-300 lg:block">
-            Configuration, testing, validation, infrastructure, and packaging —
-            handled one consistent way.
+            Configuration, testing, validation, infrastructure, and
+            packaging - handled one consistent way.
           </p>
         </div>
         <div
@@ -220,9 +219,9 @@ const sectionTitle =
         <div class="mt-10 grid gap-12 lg:grid-cols-[360px_minmax(0,1fr)]">
           <div>
             <p class="text-base leading-7 text-ink-500 dark:text-ink-300">
-              Write a controller, inject services, and test the running
-              application — with dataclasses, type hints, and pytest you
-              already know.
+              Write controllers and inject services with familiar Python constructs
+              like dataclasses and type hints, then test the running application with
+              pytest.
             </p>
             <ul class="mt-7 grid gap-3">
               {
@@ -335,9 +334,8 @@ const sectionTitle =
         <p class="mt-6 max-w-xl text-base leading-7 text-ink-300">
           Python&rsquo;s flexibility is a strength, and every component in a
           hand-assembled stack may be excellent. The cost is the repeated
-          integration work between them — and someone has to own it.
+          integration work between them, and someone has to own it.
         </p>
-        <BestFitSignals tone="dark" />
         <div class="mx-auto mt-12 grid max-w-4xl gap-px overflow-hidden rounded-lg border border-white/20 bg-white/20 md:grid-cols-2">
           <div class="bg-ink-950 p-7">
             <h3 class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink-400">
