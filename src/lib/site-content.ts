@@ -263,7 +263,7 @@ export const SKEPTIC = {
 
 export const MICRONAUT_AUDIENCE = {
   kicker: "Already building on Micronaut?",
-  copy: "Add Python without adding a second application platform — use Python on the Micronaut platform you already know.",
+  copy: "Add Python without adding a second application platform. Use Python on the Micronaut platform you already know.",
   linkLabel: "Pyronaut for Micronaut teams",
   href: "/docs/micronaut-teams/",
 };
@@ -306,7 +306,7 @@ export const DEEP_DIVES: DeepDive[] = [
   },
   {
     title: "Package for production",
-    copy: "From Python source through tested and validated production artifact — pick the packaging that fits the workload.",
+    copy: "From Python source through a tested and validated production artifact. Pick the packaging that fits the workload.",
     bullets: [
       "JVM wheel or container image",
       "GraalVM native executable",
