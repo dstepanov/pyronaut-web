@@ -31,7 +31,28 @@ variant, falls back to the OS preference).
 - `src/layouts/BaseLayout.astro` — shared head/meta/fonts + pre-paint theme
   script
 - `src/pages/index.astro` — the site homepage
-- `public/pyronaut-assets/` — logos and mascot derived from `resources/`
+- `resources/` — pristine mirror of the upstream artwork from
+  [micronaut-projects/pyronaut](https://github.com/micronaut-projects/pyronaut)
+  (`media/`); not served directly
+- `public/pyronaut-assets/` — the logos and mascot actually shipped, generated
+  from `resources/` by `scripts/build-logos.mjs`
+
+## Logo assets
+
+The header logo, full logo and mascot are served as SVG. The outputs are
+committed, so regenerating them is only needed when the upstream artwork
+changes:
+
+```sh
+npm i --no-save sharp && node scripts/build-logos.mjs
+```
+
+`sharp` is intentionally not a project dependency — the script is a one-off
+asset pipeline, not part of `npm run build`. It tightens each viewBox to the
+real ink bounds, crops a mascot-only variant, puts the Python mark on the
+narrow header's nozzle to match the mascot's flamethrower, and re-encodes the
+embedded rasters as palette PNGs (~1.2 MB total instead of ~4.9 MB). It also
+emits `mascot.png` and `favicon.png`, since social cards cannot use SVG.
 
 ## Commands
 
