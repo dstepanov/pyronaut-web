@@ -135,18 +135,19 @@ from micronaut.http.annotation import Body, Controller, Get, Post
 from micronaut.serde.annotation import Serdeable
 from micronaut.validation import Validated
 from jakarta.inject import Singleton
+from typing import Annotated
 from jakarta.validation.constraints import NotBlank, Positive
 
 @Serdeable
 @dataclass
 class Rocket:
-    name: str  # @NotBlank
-    thrust_kn: float  # @Positive
+    name: Annotated[str, NotBlank]
+    thrust_kn: Annotated[float, Positive]
 
 
 @Singleton
 class RocketService:
-    def __init__(self) -> None:
+    def __init__(self):
         self._fleet: list[Rocket] = []
 
     def launch(self, rocket: Rocket) -> Rocket:
@@ -160,7 +161,7 @@ class RocketService:
 @Validated
 @Controller("/rockets")
 class RocketController:
-    def __init__(self, service: RocketService) -> None:
+    def __init__(self, service: RocketService):
         self.service = service
 
     @Get("/")
@@ -180,26 +181,36 @@ class RocketController:
       "pytest runs against the same embedded server, DI context, and Test Resources the application uses.",
     code: `import pytest
 
-from pyronaut.test import PyronautTest
-from pyronaut.requests import HttpClient
+from pyronaut.test import MicronautTest, micronaut_test_fixture
+import pyronaut.requests
 
+@pytest.fixture
+def application_context(request: Any) -> Any:
+    fixture = micronaut_test_fixture(
+        request,
+        MicronautTest()
+    )
+    yield fixture
+    fixture.stop()
 
-@PyronautTest
-class TestRockets:
-    def test_launch(self, client: HttpClient) -> None:
-        rocket = {"name": "Ariane 7", "thrust_kn": 15000}
+@pytest.fixture
+def client(application_context: Any) -> requests.Session:
+    return requests.with_context(application_context)
 
-        created = client.post("/rockets", json=rocket)
-        assert created.status == 200
+def test_launch(client: requests.Session):
+    rocket = {"name": "Ariane 7", "thrust_kn": 15000}
 
-        fleet = client.get("/rockets").json()
-        assert fleet[0]["name"] == "Ariane 7"
+    created = client.post("/rockets", json=rocket)
+    assert created.status_code == 200
 
-    def test_validation(self, client: HttpClient) -> None:
-        response = client.post(
-            "/rockets", json={"name": "", "thrust_kn": -1}
-        )
-        assert response.status == 400`,
+    fleet = client.get("/rockets").json()
+    assert fleet[0]["name"] == "Ariane 7"
+
+def test_validation(client: requests.Session):
+    response = client.post(
+        "/rockets", json={"name": "", "thrust_kn": -1}
+    )
+    assert response.status_code == 400`,
   },
   {
     id: "workflow",
