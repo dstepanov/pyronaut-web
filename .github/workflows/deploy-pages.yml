@@ -28,9 +28,6 @@ jobs:
           enablement: true
       - run: npm ci
       - run: npm run build
-      - run: node scripts/add-base-path.mjs
-        env:
-          BASE_PATH: /pyronaut-web
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
