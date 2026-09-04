@@ -54,15 +54,15 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "Application testing",
-    copy: "pytest integrated with Micronaut Test, an embedded server, and real test infrastructure.",
+    copy: "Run pytest against the embedded application with Docker-powered Test Resources for realistic infrastructure in development and tests.",
     icon: "flask",
     href: "/docs/testing/",
   },
   {
-    title: "Test Resources built in",
-    copy: "Start supported services for development and tests with less custom setup.",
-    icon: "database",
-    href: "/docs/test-resources/",
+    title: "Optimize with Java",
+    copy: "Optimize performance-sensitive code with Java when you need more speed, without taking on complex native-code setups.",
+    icon: "bolt",
+    href: "/docs/performance/",
   },
   {
     title: "Validate before production",
