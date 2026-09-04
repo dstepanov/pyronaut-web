@@ -31,7 +31,14 @@ const navLinks = [
   { label: "Community", href: "#teams" },
 ];
 
-const heroChecks = ["One application model", "Build-time processing", "JVM & native packaging"];
+const heroChecks = [
+  "One application model",
+  "Build-time processing",
+  "JVM & native packaging",
+  "Production Grade Observability",
+  "Netty-powered Scalability",
+  "Write Once Run Anywhere",
+];
 
 const foundations = ["Python", "Micronaut", "GraalPy", "GraalVM"];
 ---
@@ -128,7 +135,7 @@ const foundations = ["Python", "Micronaut", "GraalPy", "GraalVM"];
               Explore the platform
             </a>
           </div>
-          <ul class="mt-12 flex flex-wrap gap-x-8 gap-y-3">
+          <ul class="mt-12 grid gap-x-8 gap-y-3 sm:grid-cols-3">
             {
               heroChecks.map((check) => (
                 <li class="flex items-center gap-2 text-sm font-medium text-ink-600 dark:text-ink-300">
@@ -179,11 +186,9 @@ const foundations = ["Python", "Micronaut", "GraalPy", "GraalVM"];
               </span>
             </div>
             <pre
-              class="overflow-x-auto px-6 py-5 font-mono text-[0.82rem] leading-7 text-ink-100"><code><span class="text-flame-400">@Controller</span><span class="text-ink-400">(</span><span class="text-emerald-400">"/hello"</span><span class="text-ink-400">)</span>
-<span class="text-python-blue">class</span> HelloController:
-    <span class="text-flame-400">@Get</span><span class="text-ink-400">(</span><span class="text-emerald-400">"/&#123;name&#125;"</span><span class="text-ink-400">)</span>
-    <span class="text-python-blue">def</span> <span class="text-sky-300">hello</span>(self, name: <span class="text-python-blue">str</span>):
-        <span class="text-python-blue">return</span> &#123;<span class="text-emerald-400">"message"</span>: <span class="text-python-blue">f</span><span class="text-emerald-400">"Hello, &#123;name&#125;"</span>&#125;</code></pre>
+              class="overflow-x-auto px-6 py-5 font-mono text-[0.82rem] leading-7 text-ink-100"><code><span class="text-flame-400">@Get</span><span class="text-ink-400">(</span><span class="text-emerald-400">"/hello/&#123;name&#125;"</span><span class="text-ink-400">)</span>
+<span class="text-python-blue">def</span> <span class="text-sky-300">hello</span>(name: <span class="text-python-blue">str</span>):
+    <span class="text-python-blue">return</span> &#123;<span class="text-emerald-400">"message"</span>: <span class="text-python-blue">f</span><span class="text-emerald-400">"Hello, &#123;name&#125;"</span>&#125;</code></pre>
             <div
               class="flex items-center justify-between border-t border-white/10 px-5 py-2.5 font-mono text-xs"
             >

@@ -1,6 +1,6 @@
 # pyronaut-web
 
-Marketing website for **Pyronaut** — an integrated application platform for
+This is the website for **Pyronaut** — an integrated application platform for
 Python, built on Micronaut.
 
 Built with [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.com),

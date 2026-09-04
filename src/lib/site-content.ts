@@ -47,10 +47,10 @@ export const FEATURES: Feature[] = [
     href: "/docs/source-processing/",
   },
   {
-    title: "Define once, reuse",
-    copy: "Use the same Python types for HTTP, validation, serialization, OpenAPI, and editor support.",
-    icon: "layers",
-    href: "/docs/serialization/",
+    title: "Production Grade Observability",
+    copy: "Monitor and manage your application with metrics exposed via Micrometer, tracing with OpenTelemetry, and production-grade JVM tools for performance monitoring.",
+    icon: "gauge",
+    href: "/docs/observability/",
   },
   {
     title: "Application testing",
