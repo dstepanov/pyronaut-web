@@ -131,11 +131,11 @@ export const CODE_EXAMPLES: CodeExample[] = [
       "Use Micronaut annotations directly from Python for routing, dependency injection, validation, and serialization.",
     code: `from dataclasses import dataclass
 
-from micronaut.http.annotation import Body, Controller, Get, Post
+from micronaut.http.annotation import Body, Get, Post
 from micronaut.serde.annotation import Serdeable
-from micronaut.validation import Validated
-from jakarta.inject import Singleton
+from jakarta.inject import Singleton, Inject
 from typing import Annotated
+from jakarta.validation import Valid
 from jakarta.validation.constraints import NotBlank, Positive
 
 @Serdeable
@@ -158,19 +158,15 @@ class RocketService:
         return list(self._fleet)
 
 
-@Validated
-@Controller("/rockets")
-class RocketController:
-    def __init__(self, service: RocketService):
-        self.service = service
+service: Annotated[RocketService, Inject]
 
-    @Get("/")
-    def list(self) -> list[Rocket]:
-        return self.service.fleet()
+@Get("/")
+def list(self) -> list[Rocket]:
+    return service.fleet()
 
-    @Post("/")
-    def launch(self, rocket: Body[Rocket]) -> Rocket:
-        return self.service.launch(rocket)`,
+@Post("/")
+def launch(self, rocket: Body[Rocket, Valid]) -> Rocket:
+    return service.launch(rocket)`,
   },
   {
     id: "test",
@@ -224,7 +220,7 @@ def test_validation(client: requests.Session):
   Created rocket-service/ with pyproject.toml
 
 $ pyronaut dev
-  Test Resources: postgres:17 ready on :5432
+  Test Resources: mysql:8 ready on :3306
   Server running on http://localhost:8080 (reload on)
 
 $ pyronaut test
@@ -233,7 +229,7 @@ $ pyronaut test
 $ pyronaut validate-config --env production
   Configuration OK · DI graph OK
 
-$ pyronaut build --native
+$ pyronaut build --native-base
   Native executable: build/rocket-service`,
   },
 ];
