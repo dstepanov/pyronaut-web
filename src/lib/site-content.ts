@@ -132,8 +132,9 @@ export const CODE_EXAMPLES: CodeExample[] = [
     code: `from dataclasses import dataclass
 
 from micronaut.http.annotation import Body, Get, Post
+from micronaut.context.annotation import Prototype
 from micronaut.serde.annotation import Serdeable
-from jakarta.inject import Singleton, Inject
+from jakarta.inject import Inject
 from typing import Annotated
 from jakarta.validation import Valid
 from jakarta.validation.constraints import NotBlank, Positive
@@ -145,7 +146,7 @@ class Rocket:
     thrust_kn: Annotated[float, Positive]
 
 
-@Singleton
+@Prototype
 class RocketService:
     def __init__(self):
         self._fleet: list[Rocket] = []
@@ -160,11 +161,11 @@ class RocketService:
 
 service: Annotated[RocketService, Inject]
 
-@Get("/")
+@Get("/rockets")
 def list(self) -> list[Rocket]:
     return service.fleet()
 
-@Post("/")
+@Post("/rockets")
 def launch(self, rocket: Body[Rocket, Valid]) -> Rocket:
     return service.launch(rocket)`,
   },
